@@ -6,10 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/hello', (_req, res) => {
+app.get('/hello', (_req, res) => {
   res.json({ message: 'Hello from backend!' });
 });
-app.get('/api/data/today', async (_req, res) => {
+app.get('/data/today', async (_req, res) => {
   console.log('running api/data/today');
   try {
     const fromCnb = await fetch(
@@ -24,7 +24,5 @@ app.get('/api/data/today', async (_req, res) => {
   res.json();
 });
 
+app.listen(5000, () => console.log(`Backend running on port 5000`));
 export default app;
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
