@@ -2,12 +2,10 @@
   "name": "momence-exchange-app-frontend",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
+    "build": "vite build",
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {

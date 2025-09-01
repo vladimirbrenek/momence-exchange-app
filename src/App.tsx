@@ -8,7 +8,7 @@ export default function App() {
   const { data, isLoading, error } = useQuery<currencyExchange[]>({
     queryKey: ['backendQuery'],
     queryFn: () => {
-      return fetch('/api/data/today').then((res) => res.json());
+      return fetch('/api/today').then((res) => res.json());
     },
   });
 

@@ -26,15 +26,22 @@ export function convertDataFromCnb(data: string) {
   }, []);
 }
 
-export default async function GET() {
+import { VercelRequest, VercelResponse } from '@vercel/node';
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'GET') {
+    res.status(405).send('Method not allowed');
+    return;
+  }
+
   try {
     const fromCnb = await fetch(
       `https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt`,
     );
     const textFromCnb = await fromCnb.text();
     const convertedData = convertDataFromCnb(textFromCnb);
-    return Response.json(convertedData);
+    res.status(200).json(convertedData);
   } catch {
-    return new Response('Cannot fetch data from CNB', { status: 500 });
+    res.status(500).send('Cannot fetch data from CNB');
   }
 }
